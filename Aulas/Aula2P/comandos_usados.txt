@@ -1,0 +1,9 @@
+http://localhost:3000/cidades?id=c1
+http://localhost:3000/cidades/c1
+
+http://localhost:3000/cidades?nome_like=pen -> contenham "pen" no nome_like
+http://localhost:3000/cidades?nome_like=^pen -> começam por "pen"
+
+http://localhost:3000/cidades?população_gte=200000&população_lte=500000&_sort=nome&_order=desc
+
+http://localhost:3000/ligacoes?origem=c1&distância_gte=200&_sort=distância&_limit=1
