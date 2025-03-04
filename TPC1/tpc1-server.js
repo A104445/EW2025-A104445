@@ -29,12 +29,12 @@ http.createServer((req,res) => {
                 }
             })
     } 
-    else if (req.url.startsWith("/reparacoes?nif=")) {  // Expressão regular para capturar NIF numérico
-        let nif = req.url.split("?nif=")[1] // Obtém o NIF da URL
-        axios.get(`http://localhost:3000/reparacoes?nif=${nif}`) // Filtra reparações pelo NIF
+    else if (req.url.startsWith("/reparacoes?nif=")) { 
+        let nif = req.url.split("?nif=")[1] 
+        axios.get(`http://localhost:3000/reparacoes?nif=${nif}`) 
             .then(resultado => {
                 res.writeHead(200, { 'Content-Type': 'text/html;charset=UTF-8' })
-                res.write(genIntervencoesPage(nif, resultado.data)) // Página específica
+                res.write(genIntervencoesPage(nif, resultado.data)) 
                 res.end()
             })
             .catch(err => {
