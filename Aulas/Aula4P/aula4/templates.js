@@ -130,7 +130,7 @@ exports.studentFormEditPage = function(a, d){
                     <h2>Student Form</h2>
                 </header>
             
-                <form class="w3-container" method="POST">
+                <form class="w3-container" method="PUT">
                     <fieldset>
                         <legend>Metadata</legend>
                         <label>Id</label>

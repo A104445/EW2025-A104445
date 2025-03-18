@@ -70,20 +70,20 @@ var alunosServer = http.createServer((req, res) => {
                     res.write(templates.studentFormPage(d))
                     res.end()
                 // GET /alunos/edit/:id --------------------------------------------------------------------
-                }else if(req.url.match("/alunos/edit\/(A|PG)\d+$")){
-                    id = req.url.split('/')[3]
-                    axios.get(`http://localhost:3000/alunos/${id}`)
-                        .then(resp => {
-                            aluno = resp.data
-                            res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
-                            res.write(templates.studentFormEditPage(aluno, d))
-                            res.end()
-                        })
-                       .catch(error => {
-                            console.log(error)  
-                            res.writeHead(500, {'Content-Type': 'text/html; charset=utf-8'})
-                            res.end()
-                       })
+                // }else if(req.url.match("/alunos/edit\/(A|PG)\d+$")){
+                //     id = req.url.split('/')[3]
+                //     axios.get(`http://localhost:3000/alunos/${id}`)
+                //         .then(resp => {
+                //             aluno = resp.data
+                //             res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+                //             res.write(templates.studentFormEditPage(aluno, d))
+                //             res.end()
+                //         })
+                //        .catch(error => {
+                //             console.log(error)  
+                //             res.writeHead(500, {'Content-Type': 'text/html; charset=utf-8'})
+                //             res.end()
+                //        })
                 // // GET /alunos/delete/:id --------------------------------------------------------------------
                 // }else if(req.url.match("/alunos/delete\/(A|PG)\d+$")){
                 //     id = req.url.split('/')[3]
@@ -174,8 +174,8 @@ var alunosServer = http.createServer((req, res) => {
                 
                 break
             case "PUT":
-                if(req.url.match("/alunos/edit\/(A|PG)\d+$")){
-                    id = req.url.split('/')[3]
+                if(req.url.match("/alunos/edit/:id")){
+                    //id = req.url.split('/')[3]
                     collectRequestBodyData(req, body => {
                         if(body){
                             axios.put(`http://localhost:3000/alunos/${id}`, body)
@@ -198,7 +198,7 @@ var alunosServer = http.createServer((req, res) => {
                 }
                 break
             case "DELETE":
-                if(req.url.match("/alunos/delete\/(A|PG)\d+$")){
+                if(req.url.match("/alunos/delete/(A|PG)\d+$")){
                     id = req.url.split('/')[3]
                     axios.delete(`http://localhost:3000/alunos/${id}`)
                        .then(resp => {

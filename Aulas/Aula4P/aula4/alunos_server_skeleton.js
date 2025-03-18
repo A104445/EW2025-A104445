@@ -40,17 +40,42 @@ var alunosServer = http.createServer((req, res) => {
         switch(req.method){
             case "GET": 
                 // GET /alunos --------------------------------------------------------------------
-                if(req.url == "/" || req.url == "alunos"){
+                if(req.url == "/" || req.url == "/alunos"){
                     //TODO
-                    res.writeHead(405, {'Content-Type': 'text/html; charset=utf-8'})
+                    axios.get("http://localhost:3000/alunos")
+                       .then(resp => {
+                            var alunos = resp.data
+                            res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+                            res.write(templates.studentsListPage(alunos, d))
+                            res.end()
+                        })
+                       .catch(error => {
+                            console.log(error)
+                            res.writeHead(500, {'Content-Type': 'text/html; charset=utf-8'})
+                            res.end()
+                        })
+                    // res.writeHead(405, {'Content-Type': 'text/html; charset=utf-8'})
                 // GET /alunos/:id --------------------------------------------------------------------
                 }else if(req.url.match("/alunos\/(A|PG)\d+$")){
                     //TODO
-                    res.writeHead(405, {'Content-Type': 'text/html; charset=utf-8'})
+                    id = req.url.split('/')[3]
+                    axios.get(`http://localhost:3000/alunos/${id}`)
+                       .then(resp => {
+                            aluno = resp.data
+                            res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+                            res.write(templates.studentPage(aluno, d))
+                            res.end()
+                        })
+                       .catch(error => {
+                            console.log(error)  
+                            res.writeHead(500, {'Content-Type': 'text/html; charset=utf-8'})
+                            res.end()
+                       })
+                    // res.writeHead(405, {'Content-Type': 'text/html; charset=utf-8'})
                 // GET /alunos/registo --------------------------------------------------------------------
                 }else if(req.url == "/alunos/registo"){
                     //TODO
-                    res.writeHead(405, {'Content-Type': 'text/html; charset=utf-8'})
+                    res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
                     res.write(templates.studentFormPage(d))
                     res.end()
                 // GET /alunos/edit/:id --------------------------------------------------------------------
@@ -69,7 +94,8 @@ var alunosServer = http.createServer((req, res) => {
                             res.end()
                        })
                 // GET /alunos/delete/:id --------------------------------------------------------------------
-                }else if(req.url.match("/alunos/delete\/(A|PG)\d+$")){
+                // }else if(req.url.match("/alunos/delete\/(A|PG)\d+$")){
+                    
                 // GET ? -> Lancar um erro
                 }else{}
                 break
@@ -150,6 +176,18 @@ var alunosServer = http.createServer((req, res) => {
                 }
                 break
             case "DELETE":
+                if(req.url.match("/alunos/delete\/(A|PG)\d+$")){
+                    id = req.url.split('/')[3]
+                    axios.delete(`http://localhost:3000/alunos/${id}`)
+                        .then(resp => {
+                            res.writeHead(302, { 'Location': '/alunos' }) 
+                        })
+                        .catch(error => {
+                            console.log(error)  
+                            res.writeHead(500, {'Content-Type': 'text/html; charset=utf-8'})
+                            res.end()
+                        })
+                }
                 break
             default: 
                 res.writeHead(500, {'Content-Type': 'text/html; charset=utf-8'})
