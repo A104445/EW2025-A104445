@@ -1,0 +1,5 @@
+docker cp (ficheiro a copiar) (container):/tmp
+
+docker exec -it (container) sh 
+
+mongoimport -d (nome) -c (nome) (localizacao) --jsonArray
