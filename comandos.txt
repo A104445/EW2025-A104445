@@ -1,5 +1,19 @@
+sudo fuser -k 27017/tcp -> libertar porta 27017
+
+docker start mongoEW
+
 docker cp (ficheiro a copiar) (container):/tmp
 
 docker exec -it (container) sh 
 
 mongoimport -d (nome) -c (nome) (localizacao) --jsonArray
+
+mongosh
+
+jq
+
+npx express-generator contratos --view=pug
+
+npm i mongoose
+
+npm start 

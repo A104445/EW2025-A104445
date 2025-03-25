@@ -1,0 +1,1 @@
+var Contrato = require(''
