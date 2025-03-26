@@ -2,6 +2,8 @@ sudo fuser -k 27017/tcp -> libertar porta 27017
 
 docker start mongoEW
 
+docker ps
+
 docker cp (ficheiro a copiar) (container):/tmp
 
 docker exec -it (container) sh 
