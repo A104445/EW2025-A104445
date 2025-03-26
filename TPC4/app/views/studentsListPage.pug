@@ -17,13 +17,13 @@ block content
                     each aluno in slist 
                         tr 
                             td= aluno.id 
-                            td #{aluno.nome} 
+                            //- td #{aluno.nome} 
                             td 
                                 a(href="/alunos/" + aluno.id)= aluno.nome 
                             td= aluno.gitlink 
                             td 
                                 span [
-                                a(href="/alunos/edit" + aluno.id) Edit
+                                a(href="/alunos/edit/" + aluno.id) Edit
                                 span ]
                                 span [
                                 a(href="/alunos/delete" + aluno.id) Delete
