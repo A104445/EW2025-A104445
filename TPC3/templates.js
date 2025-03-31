@@ -36,7 +36,7 @@ exports.studentsListPage = function(slist, d){
                     <td>${slist[i].nome}</td>
                     <td>${slist[i].gitlink}</td>
                     <td>
-                        [<a href="/alunos/edit/${slist[i].id}">Edit</a>][<a href="/alunos/delete/${slist[i].id}">Delete</a>]
+                        [<a href="/alunos/edit?id=${slist[i].id}">Edit</a>][<a href="/alunos/delete?id=${slist[i].id}">Delete</a>]
                     </td>
                 </tr>
         `
@@ -130,7 +130,7 @@ exports.studentFormEditPage = function(a, d){
                     <h2>Student Form</h2>
                 </header>
             
-                <form class="w3-container" method="PUT">
+                <form class="w3-container" method="POST">
                     <fieldset>
                         <legend>Metadata</legend>
                         <label>Id</label>

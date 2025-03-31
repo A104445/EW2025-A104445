@@ -1,0 +1,47 @@
+extends layout
+
+block content
+  .w3-card-4
+    .header.w3-container.w3-purple
+      h2 Student Information
+
+    .w3-container
+      fieldset
+        legend Metadata
+        label(for="id") Id:
+        p= student.id
+
+        label(for="nome") Name:
+        p= student.nome
+
+        label(for="gitlink") Git:
+        p= student.gitlink
+
+    .w3-container
+      fieldset
+        legend TPC
+        label TPC1
+        p= student.tpc1 ? 'Checked' : 'Not Checked'
+        
+        label TPC2
+        p= student.tpc2 ? 'Checked' : 'Not Checked'
+        
+        label TPC3
+        p= student.tpc3 ? 'Checked' : 'Not Checked'
+        
+        label TPC4
+        p= student.tpc4 ? 'Checked' : 'Not Checked'
+        
+        label TPC5
+        p= student.tpc5 ? 'Checked' : 'Not Checked'
+        
+        label TPC6
+        p= student.tpc6 ? 'Checked' : 'Not Checked'
+        
+        label TPC7
+        p= student.tpc7 ? 'Checked' : 'Not Checked'
+        
+        label TPC8
+        p= student.tpc8 ? 'Checked' : 'Not Checked'
+
+    a(href="/alunos") Voltar

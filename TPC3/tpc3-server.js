@@ -50,8 +50,8 @@ var alunosServer = http.createServer((req, res) => {
                             res.end()
                         })
                 // GET /alunos/:id --------------------------------------------------------------------
-                }else if(req.url.match("/alunos\/(A|PG)\d+$")){
-                    id = req.url.split('/')[2]
+                }else if(req.url.startsWith("/alunos?id=")){
+                    let id = req.url.split("?id=")[1]
                     axios.get(`http://localhost:3000/alunos/${id}`)
                         .then(resp => {
                             var aluno = resp.data
@@ -70,33 +70,33 @@ var alunosServer = http.createServer((req, res) => {
                     res.write(templates.studentFormPage(d))
                     res.end()
                 // GET /alunos/edit/:id --------------------------------------------------------------------
-                // }else if(req.url.match("/alunos/edit\/(A|PG)\d+$")){
-                //     id = req.url.split('/')[3]
-                //     axios.get(`http://localhost:3000/alunos/${id}`)
-                //         .then(resp => {
-                //             aluno = resp.data
-                //             res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
-                //             res.write(templates.studentFormEditPage(aluno, d))
-                //             res.end()
-                //         })
-                //        .catch(error => {
-                //             console.log(error)  
-                //             res.writeHead(500, {'Content-Type': 'text/html; charset=utf-8'})
-                //             res.end()
-                //        })
+                }else if(req.url.startsWith("/alunos/edit?id=")){
+                    let id = req.url.split("?id=")[1]
+                    axios.get(`http://localhost:3000/alunos/${id}`)
+                        .then(resp => {
+                            aluno = resp.data
+                            res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+                            res.write(templates.studentFormEditPage(aluno, d))
+                            res.end()
+                        })
+                       .catch(error => {
+                            console.log(error)  
+                            res.writeHead(500, {'Content-Type': 'text/html; charset=utf-8'})
+                            res.end()
+                       })
                 // // GET /alunos/delete/:id --------------------------------------------------------------------
-                // }else if(req.url.match("/alunos/delete\/(A|PG)\d+$")){
-                //     id = req.url.split('/')[3]
-                //     axios.delete(`http://localhost:3000/alunos/${id}`)
-                //     .then(resp => {
-                //         res.writeHead(302, { 'Location': '/alunos' }) 
-                //         res.end()
-                //     })
-                //      .catch(error => {
-                //         console.log(error)  
-                //         res.writeHead(500, {'Content-Type': 'text/html; charset=utf-8'})
-                //         res.end()
-                //     })
+                }else if(req.url.startsWith("/alunos/delete?id=")){
+                    let id = req.url.split("?id=")[1]
+                    axios.delete(`http://localhost:3000/alunos/${id}`)
+                    .then(resp => {
+                        res.writeHead(302, { 'Location': '/alunos' }) 
+                        res.end()
+                    })
+                     .catch(error => {
+                        console.log(error)  
+                        res.writeHead(500, {'Content-Type': 'text/html; charset=utf-8'})
+                        res.end()
+                    })
                 // GET ? -> Lancar um erro
                 }else{
                     res.writeHead(404, {'Content-Type': 'text/html; charset=utf-8'})
@@ -109,6 +109,7 @@ var alunosServer = http.createServer((req, res) => {
                 if(req.url === "/alunos/registo"){
                     collectRequestBodyData(req, body => {
                         if(body){
+                            console.log("Recebido body:", body);
                             axios.post('http://localhost:3000/alunos', body)
                                 .then(resp => {
                                     res.writeHead(302, { 'Location': '/alunos' }) 
@@ -126,7 +127,6 @@ var alunosServer = http.createServer((req, res) => {
                             res.write()
                         }
                     })
-                }
                 // POST /alunos/edit/:id --------------------------------------------------------------------
                 // else if(req.url.match("/alunos/edit\/(A|PG)\d+$")){
                 //     id = req.url.split('/')[3]
@@ -166,16 +166,8 @@ var alunosServer = http.createServer((req, res) => {
                 //         })
                 // }
                 // POST ? -> Lancar um erro
-                else{
-                    res.writeHead(404, {'Content-Type': 'text/html; charset=utf-8'})
-                    res.write(`<p>Página não encontrada: ${req.url}</p>`)
-                    res.end()
-                }
-                
-                break
-            case "PUT":
-                if(req.url.match("/alunos/edit/:id")){
-                    //id = req.url.split('/')[3]
+                }else if(req.url.startsWith("/alunos/edit?id=")){
+                    let id = req.url.split("?id=")[1]
                     collectRequestBodyData(req, body => {
                         if(body){
                             axios.put(`http://localhost:3000/alunos/${id}`, body)
@@ -195,15 +187,13 @@ var alunosServer = http.createServer((req, res) => {
                             res.write()
                         }
                     })
-                }
-                break
-            case "DELETE":
-                if(req.url.match("/alunos/delete/(A|PG)\d+$")){
-                    id = req.url.split('/')[3]
+                }else if(req.url.startsWith("/alunos/delete?id=")){
+                    let id = req.url.split("?id=")[1]
                     axios.delete(`http://localhost:3000/alunos/${id}`)
                        .then(resp => {
-                            res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
-                            res.write(`<p>Aluno eliminado: ${id}</p>`)
+                            // res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+                            // res.write(`<p>Aluno eliminado: ${id}</p>`)
+                            res.writeHead(302, { 'Location': '/alunos' }) 
                             res.end()
                         })
                        .catch(error => {
@@ -212,6 +202,52 @@ var alunosServer = http.createServer((req, res) => {
                             res.end()
                         })
                 }
+                else{
+                    res.writeHead(404, {'Content-Type': 'text/html; charset=utf-8'})
+                    res.write(`<p>Página não encontrada: ${req.url}</p>`)
+                    res.end()
+                }
+                
+                break
+            case "PUT":
+                // if(req.url.match("/alunos/edit/:id")){
+                //     //id = req.url.split('/')[3]
+                //     collectRequestBodyData(req, body => {
+                //         if(body){
+                //             axios.put(`http://localhost:3000/alunos/${id}`, body)
+                //                .then(resp => {
+                //                     res.writeHead(302, { 'Location': '/alunos' }) 
+                //                     res.end()
+                //                 })
+                //                .catch(error => {
+                //                     console.log(error)  
+                //                     res.writeHead(500, {'Content-Type': 'text/html; charset=utf-8'})
+                //                     res.end()
+                //                 })
+                //         }
+                //         else{
+                //             console.log("No body data")  
+                //             res.writeHead(500, {'Content-Type': 'text/html; charset=utf-8'})
+                //             res.write()
+                //         }
+                //     })
+                // }
+                break
+            case "DELETE":
+                // if(req.url.match("/alunos/delete/(A|PG)\d+$")){
+                //     id = req.url.split('/')[3]
+                //     axios.delete(`http://localhost:3000/alunos/${id}`)
+                //        .then(resp => {
+                //             res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+                //             res.write(`<p>Aluno eliminado: ${id}</p>`)
+                //             res.end()
+                //         })
+                //        .catch(error => {
+                //             console.log(error)  
+                //             res.writeHead(500, {'Content-Type': 'text/html; charset=utf-8'})
+                //             res.end()
+                //         })
+                // }
                 break
             default: 
                 res.writeHead(500, {'Content-Type': 'text/html; charset=utf-8'})
