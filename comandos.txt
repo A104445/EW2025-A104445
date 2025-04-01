@@ -8,7 +8,9 @@ docker cp (ficheiro a copiar) (container):/tmp
 
 docker exec -it (container) sh 
 
-mongoimport -d (nome) -c (nome) (localizacao) --jsonArray
+mongoimport -d (nome) -c (nome) (localizacao) --jsonArray -> localizacao tmp/nome ficheiro
+
+cat dataset_corrigido.json | jq . -> ver onde está o erro
 
 mongosh
 

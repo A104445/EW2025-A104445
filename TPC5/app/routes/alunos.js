@@ -16,7 +16,10 @@ router.get('/registo', function(req, res, next) {
 
 router.post('/registo', function(req, res, next) {
   Aluno.insert(req.body)
-   .then(data => res.status(201).redirect('/alunos'))
+  .then(data => {
+    console.log("Aluno registado com sucesso", data);
+    res.status(201).send("Aluno registado com sucesso!"); // Verifique a resposta no navegador
+  })
    .catch(err => res.jsonp(err));
 });
 
