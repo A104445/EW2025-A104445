@@ -11,33 +11,45 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/registo', function(req, res, next) {
-  res.status(200).render('studentFormPage')
+  res.render('studentFormPage')
 });
 
 router.post('/registo', function(req, res, next) {
   Aluno.insert(req.body)
-  .then(data => {
-    console.log("Aluno registado com sucesso", data);
-    res.status(201).send("Aluno registado com sucesso!"); // Verifique a resposta no navegador
-  })
-   .catch(err => res.jsonp(err));
+    .then(data => {
+      res.redirect('/alunos'); 
+    })
+    .catch(err => {
+      res.status(500).json({ error: "Erro ao inserir aluno" });
+    });
 });
+
 
 router.get('/:id', function(req, res, next) {
   Aluno.findById(req.params.id)
-   .then(data => res.jsonp(data))
+   .then(data => res.status(200).render('studentPage',{'student': data}))
    .catch(err => res.jsonp(err));
 });
 
-router.put('/:id', function(req, res, next) {
+router.get('/edit/:id', function(req, res, next) {
+  Aluno.findById(req.params.id)
+   .then(data => res.status(200).render('studentFormEditPage',{'student': data}))
+   .catch(err => res.jsonp(err));
+});
+
+router.post('/edit/:id', function(req, res, next) {
   Aluno.update(req.params.id, req.body)
-   .then(data => res.jsonp(data))
+   .then(data => res.status(202).redirect('/alunos'))
    .catch(err => res.jsonp(err));
 });
 
-router.delete('/:id', function(req, res, next) {
+router.get('/delete/:id', function(req, res, next) {
+  res.render('deletePage',{id: req.params.id});
+});
+
+router.post('/delete/:id', function(req, res, next) {
   Aluno.delete(req.params.id)
-   .then(data => res.jsonp(data))
+   .then(data => res.status(203).redirect('/alunos'))
    .catch(err => res.jsonp(err));
 });
 

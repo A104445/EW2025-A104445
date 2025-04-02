@@ -16,16 +16,16 @@ block content
                         th Actions
                     each aluno in slist 
                         tr 
-                            td= aluno.id 
+                            td= aluno._id 
                             //- td #{aluno.nome} 
                             td 
-                                a(href="/alunos/" + aluno.id)= aluno.nome 
+                                a(href="/alunos/" + aluno._id)= aluno.nome 
                             td= aluno.gitlink 
                             td 
                                 span [
-                                a(href="/alunos/edit/" + aluno.id) Edit
+                                a(href="/alunos/edit/" + aluno._id) Edit
                                 span ]
                                 span [
-                                a(href="/alunos/delete/" + aluno.id) Delete
+                                a(href="/alunos/delete/" + aluno._id) Delete
                                 span ]
             

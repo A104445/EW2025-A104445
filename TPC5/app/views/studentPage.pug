@@ -8,8 +8,8 @@ block content
     .w3-container
       fieldset
         legend Metadata
-        label(for="id") Id:
-        p= student.id
+        label(for="_id") Id:
+        p= student._id
 
         label(for="nome") Name:
         p= student.nome
@@ -44,4 +44,4 @@ block content
         label TPC8
         p= student.tpc8 ? 'Checked' : 'Not Checked'
 
-    a(href="/alunos") Voltar
+    //- a(href="/alunos") Voltar

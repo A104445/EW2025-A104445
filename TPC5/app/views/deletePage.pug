@@ -1,0 +1,7 @@
+extends layout
+
+block content
+    form#deleteForm(method="POST", action="/alunos/delete/" + id)
+        input(type="hidden", name="_id", value=id)
+    script.
+        document.getElementById("deleteForm").submit();

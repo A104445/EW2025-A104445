@@ -5,11 +5,11 @@ block content
             .header.w3-container.w3-purple
                 h2 Student Form
 
-            form.w3-container(action="/alunos/registo" method="POST")
+            form.w3-container(method="POST" action="/alunos/registo")
                 fieldset
                     legend Metadata
                     label Id
-                    input.w3-input.w3-round(type="text" name="id" required)
+                    input.w3-input.w3-round(type="text" name="_id" required)
                     label Name
                     input.w3-input.w3-round(type="text" name="nome" required)
                     label Git

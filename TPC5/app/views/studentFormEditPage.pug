@@ -5,11 +5,11 @@ block content
     header.w3-container.w3-orange
       h2 Student Form
 
-    form.w3-container(method="POST")
+    form.w3-container(method="POST" action=`/alunos/edit/${student._id}`)
       fieldset
         legend Metadata
         label Id
-        input.w3-input.w3-round(type="text" name="id" readonly value=student.id)
+        input.w3-input.w3-round(type="text" name="_id" readonly value=student._id)
         label Name
         input.w3-input.w3-round(type="text" name="nome" value=student.nome)
         label Git
