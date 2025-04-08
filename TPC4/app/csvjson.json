@@ -64,12 +64,6 @@
       "tpc4": "1"
     },
     {
-      "id": "A10",
-      "nome": "cfgb",
-      "gitlink": "c",
-      "tpc2": "1"
-    },
-    {
       "id": "123321",
       "nome": "Teste",
       "gitlink": "123",

@@ -17,3 +17,11 @@ Na página de cursos, são apresentados os identificadores dos cursos que existe
 Na página de instrumentos, são apresentados os nomes dos instrumentos que os alunos daquela escola tocam. Para cada instrumento, é possível ver a informação de cada aluno que o toca.
 
 Em cada uma destas páginas, existe a opção de voltar para a página anterior.
+
+![Página inicial](../imagens/TPC2pi.png)
+![Página alunos](../imagens/TPC2pa.png)
+![Página alunos detalhes](../imagens/TPC2pad.png)
+![Página cursos](../imagens/TPC2pc.png)
+![Página alunos curso](../imagens/TPC2pca.png)
+![Página instrumentos](../imagens/TPC2pi.png)
+![Página alunos instrumento](../imagens/TPC2pia.png)

@@ -15,3 +15,10 @@ Na página de reparações, são apresentados os dados referentes à marca e ao 
 Na página de marcas, são apresentados os nomes das marcas em que foram feitas reparações. Para cada marca, é possível ver a lista de modelos e de matrículas onde se fizeram reparações.
 
 Na página de modelos, são apresentados os nomes dos modelos em que foram feitas reparações bem como a marca a que pertence e a sua matrícula.
+
+![Página inicial](../imagens/TPC1pi.png)
+![Página reparações](../imagens/TPC1pr.png)
+![Página intervenções reparação](../imagens/TPC1pri.png)
+![Página marcas](../imagens/TPC1pma.png)
+![Página modelos marca](../imagens/TPC1pmm.png)
+![Página modelos](../imagens/TPC1pmo.png)

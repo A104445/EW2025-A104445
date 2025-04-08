@@ -53,9 +53,9 @@ router.post('/delete/:id', function(req, res, next) {
    .catch(err => res.jsonp(err));
 });
 
-router.put('/:id/tpc/:idTpc', function(req, res, next) {
+router.get('/:id/tpc/:idTpc', function(req, res, next) {
   Aluno.inverteTpc(req.params.id,req.params.idTpc)
-   .then(data => res.jsonp(data))
+   .then(data => res.jsonp(data).redirect('/alunos'))
    .catch(err => res.jsonp(err));
 });
 

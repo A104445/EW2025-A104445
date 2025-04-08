@@ -29,7 +29,7 @@ exports.studentsListPage = function(slist, d){
         pagHTML += `
                 <tr>
                     <td>
-                        <a href="/alunos/${slist[i].id}">
+                        <a href="/alunos?id=${slist[i].id}">
                             ${slist[i].id}
                         </a>
                     </td>
