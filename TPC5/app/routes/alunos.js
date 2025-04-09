@@ -39,7 +39,7 @@ router.get('/edit/:id', function(req, res, next) {
 
 router.post('/edit/:id', function(req, res, next) {
   Aluno.update(req.params.id, req.body)
-   .then(data => res.status(202).redirect('/alunos'))
+   .then(data => res.status(201).redirect('/alunos'))
    .catch(err => res.jsonp(err));
 });
 
@@ -49,13 +49,13 @@ router.get('/delete/:id', function(req, res, next) {
 
 router.post('/delete/:id', function(req, res, next) {
   Aluno.delete(req.params.id)
-   .then(data => res.status(203).redirect('/alunos'))
+   .then(data => res.status(201).redirect('/alunos'))
    .catch(err => res.jsonp(err));
 });
 
 router.get('/:id/tpc/:idTpc', function(req, res, next) {
   Aluno.inverteTpc(req.params.id,req.params.idTpc)
-   .then(data => res.jsonp(data).redirect('/alunos'))
+   .then(data => res.status(201).redirect('/alunos'))
    .catch(err => res.jsonp(err));
 });
 
