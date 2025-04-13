@@ -1,0 +1,38 @@
+extends layout
+
+block content
+    .w3-card-4
+        header.w3-container.w3-green 
+            h1 
+                span Info Entidade 
+            h2 Entidade: #{entidade}
+            h4 NIPC: #{nipc}
+
+        .w3-container  
+            fieldset  
+                table.w3-table-all.w3-hoverable
+                    thead
+                        tr
+                            th ID Contrato
+                            th Objeto
+                            th Preço
+                            th Tipo Procedimento
+                            th Data Publicação
+                    tbody
+                        each c in contratos
+                            tr
+                                td= c.idcontrato
+                                td= c.objetoContrato
+                                td= c.precoContratual
+                                td= c.tipoprocedimento
+                                td= c.dataPublicacao
+
+                - var total = 0
+                each c in contratos
+                    - total += (Number(c.precoContratual) || 0)
+
+                p
+                strong Somatório do valor dos contratos: 
+                | #{total.toFixed(2)} €
+                            
+            a(href="/contratos") Voltar

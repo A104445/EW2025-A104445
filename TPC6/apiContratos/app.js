@@ -4,9 +4,14 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose')
-var mongoDB = 'mongodb://127.0.0.1:27017/contratos'
+var mongoDB = 'mongodb://127.0.0.1:27017/contratosP'
 
-mongoose.connect(mongoDB)
+mongoose.connect(mongoDB, {
+  serverSelectionTimeoutMS: 60000, // 60 segundos
+  socketTimeoutMS: 60000,         // 60 segundos para o socket
+  useNewUrlParser: true,          // Usar o novo parser de URL
+  useUnifiedTopology: true       // Usar o novo mecanismo de topo de conexão
+});
 var db =  mongoose.connection
 
 db.on('error', console.error.bind(console, 'Erro de conexão ao MongoDB'))

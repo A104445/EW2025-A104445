@@ -1,0 +1,44 @@
+extends layout
+
+block content
+    .w3-card-4
+        header.w3-container.w3-green 
+            h1 
+                span Info Contrato 
+
+        .w3-container  
+            fieldset  
+                label(for="idcontrato") Id:
+                p= contrato.idcontrato
+
+                label(for="nAnuncio") nAnuncio:
+                p= contrato.nAnuncio
+
+                label(for="tipoprocedimento") tipoprocedimento:
+                p= contrato.tipoprocedimento
+
+                label(for="objectoContrato") objectoContrato:
+                p= contrato.objectoContrato
+
+                label(for="dataPublicacao") dataPublicacao:
+                p= contrato.dataPublicacao
+
+                label(for="dataCelebracaoContrato") dataCelebracaoContrato:
+                p= contrato.dataCelebracaoContrato
+
+                label(for="precoContratual") precoContratual:
+                p= contrato.precoContratual
+
+                label(for="prazoExecucao") prazoExecucao:
+                p= contrato.prazoExecucao
+
+                label(for="NIPC_entidade_comunicante") NIPC_entidade_comunicante:
+                p= contrato.NIPC_entidade_comunicante
+
+                label(for="entidade_comunicante") entidade_comunicante:
+                p= contrato.entidade_comunicante
+
+                label(for="fundamentacao") fundamentacao:
+                p= contrato.fundamentacao
+            
+            a(href="/contratos") Voltar

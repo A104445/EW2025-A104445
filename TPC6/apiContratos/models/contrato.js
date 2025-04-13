@@ -2,6 +2,7 @@ var mongoose = require('mongoose')
 
 var contratoSchema = new mongoose.Schema({
     _id : Number,
+    idcontrato : String,
     nAnuncio : String,
     tipoprocedimento : String, 
     objectoContrato : String,

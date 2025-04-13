@@ -1,3 +1,4 @@
+const contrato = require('../models/contrato')
 var Contrato = require('../models/contrato')
 
 module.exports.list = () => {
@@ -7,7 +8,12 @@ module.exports.list = () => {
 
 
 module.exports.findById = id => {
-    return Contrato.findOne({'_id' : id})
+    return Contrato.findOne({'idcontrato' : id})
+            .exec()   
+}
+
+module.exports.findByNipc = nipc => {
+    return Contrato.find({'NIPC_entidade_comunicante' : nipc})
             .exec()   
 }
 
@@ -34,9 +40,12 @@ module.exports.listTypes = () => {
                 .exec()   
 }
 
-module.exports.insert = contr => {
-    var newctr = new Contrato(contr);
-    return newctr.save();
+module.exports.insert = (contr) => {
+    if(Contrato.find({_id : contrato._id}).exec().length !=1){
+        var newctr = new Contrato(contr);
+        newctr._id = contr._id;
+        return newctr.save();
+    } 
 }
 
 module.exports.update = (contr, id) => {
