@@ -1,23 +1,91 @@
-sudo fuser -k 27017/tcp -> libertar porta 27017
+// gerar nodejs
+npx express-generator nomeAPI --view=pug
+Ex: npx express-generator contratos --view=pug
 
+// instalar mongoose
+npm i mongoose
+
+// correr api
+npm start 
+
+// libertar porta 27017
+sudo fuser -k 27017/tcp
+
+// por a correr o docker
+docker run -d -p 27017:27017 --name mongoEW -v mongoData2025:/data/db mongo
+
+// entrar no docker
 docker start mongoEW
 
+// ver dockers
 docker ps
 
+// meter ficheiros no docker
+docker cp localFile container:destinationFolder
 docker cp (ficheiro a copiar) (container):/tmp
+Ex: docker cp jcrpubs.json mongoEW:/tmp
 
+// executar docker em shell
 docker exec -it (container) sh 
+Ex: docker exec -it mongoEW sh
 
+// entrar logo no mongodb 
+docker exec -it mongoEW mongosh
+
+// criar coleção no mongodb
+mongoimport -d database -c collection dataset
 mongoimport -d (nome) -c (nome) (localizacao) --jsonArray -> localizacao tmp/nome ficheiro
+Ex: mongoimport -d pubs -c pubs /tmp/jcrpubs.json --jsonArray
 
 cat dataset_corrigido.json | jq . -> ver onde está o erro
 
+// abrir shell do mongodb
 mongosh
+
+// mostrar dbs (dentro do mongosh)
+show dbs
+
+// usar db (dentro do mongosh)
+use db
+Ex: use pubs
+
+// pesquisa no shell do mongo
+db.pubs.funcão
+Ex: db.pubs.countDocuments()
+    db.pubs.find()
+    db.pubs.find.pretty()
+    db.pubs.find({}, {_id:0, title:1, type:1, year:1}).sort({year:-1})
+    db.pubs.find({type:”inproceedings”}).count()
+    db.pubs.find({authors:”Pedro Rangel Henriques”}, {id:1, title:1, _id:0})
+    db.records.find({
+        "$or": [
+            {"tit": {"$regex": "Jesus", "$options": "i"}},
+            {"tit": {"$regex": "Maria", "$options": "i"}}
+        ]
+    }, {"tit": 1, "_id": 0})
+    db.records.distinct("prov")
+    db.records.aggregate([
+        {"$group": {"_id": "$prov", "count": {"$sum": 1}}},
+        {"$sort": {"_id": 1}}
+    ])
+    db.collectionName.insert([{...}, {...}, {...}, ...])
+    db.collectionName.insertOne()
+    db.collectionName.insertMany()
+    db.musics.find({$and:[
+        {prov:"Minho"},
+        {musico:"BMVV"}
+        ]}).pretty()
+    db.musics.find({$or:[
+        {prov:"Minho"},
+        {prov:"Estremadura"}
+        ]}).pretty()
+    db.collectionName.find().limit(Number)
+    db.collectionName.find().limit(Number).skip(Number)
+    db.collectionName.find().sort({KEY: 1})
+
+// testar se der erro no npm start
+node ./bin/www
+
 
 jq
 
-npx express-generator contratos --view=pug
-
-npm i mongoose
-
-npm start 

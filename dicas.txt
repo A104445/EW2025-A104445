@@ -1,0 +1,7 @@
+processar dataset antes de iniciar docker e mongodb
+
+usar terminal fora do vs code
+
+usar navegador mais leve --> brave
+
+usar TPC6 e aula7 (pasta de zip) --> TPC6 mais completo
