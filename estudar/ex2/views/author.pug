@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  .w3-container.w3-teal
+    h1 Autor: #{autor.id}
+    p Total de livros: #{total}
+
+  if total > 0
+    table.w3-table-all.w3-hoverable.w3-striped.w3-bordered
+      thead
+        tr.w3-light-grey
+          th Título
+          th Publicação
+          th Páginas
+      tbody
+        each livro in livros
+          tr
+            td: a.w3-text-blue(href='/' + livro.title)= livro.title
+            td= livro.publishDate
+            td= livro.pages
+  else
+    .w3-panel.w3-yellow
+      p Este autor não tem livros registados.
+
+  br
+  a.w3-button.w3-blue(href="/") Voltar à página principal

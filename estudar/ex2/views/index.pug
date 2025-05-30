@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  h1.w3-container.w3-teal Lista de Livros
+  table.w3-table-all.w3-hoverable
+    thead
+      tr.w3-light-grey
+        th ID
+        th Título
+        th Autor(es)
+        th Publicação
+        th Páginas
+    tbody
+      each livro in books
+        tr
+          td: a(href='/' + livro.title)= livro.title
+          td= livro.title
+          td
+            each autor, i in livro.authors
+              - const nomeAutorEncoded = encodeURIComponent(autor)
+              a(href=`/entidades/${nomeAutorEncoded}`)= autor
+              if i !== livro.authors.length - 1
+                | , 
+          td= livro.publishDate
+          td= livro.pages

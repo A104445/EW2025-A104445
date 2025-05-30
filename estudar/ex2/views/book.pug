@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1.w3-container.w3-teal= book.title
+  ul.w3-ul.w3-card-4
+    li.w3-padding-16 ID: #{book.title}
+    li.w3-padding-16 Autor: #{book.author}
+    li.w3-padding-16 ISBN: #{book.isbn}
+    li.w3-padding-16 Géneros: #{book.genres.join(', ')}
+    li.w3-padding-16 Publicação: #{book.publishDate}
+    li.w3-padding-16 Páginas: #{book.pages}
+    li.w3-padding-16 Personagens: #{book.characters.join(', ')}
+    if book.coverImg
+      li.w3-padding-16
+        img.w3-image(src=book.coverImg, alt="Capa do livro", style="max-width:200px;")
+  br
+  a.w3-button.w3-blue(href="/") Voltar à página principal
